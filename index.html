@@ -10,6 +10,8 @@
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
+  <script src="knjiznice/js/liquidFillGauge.js" language="JavaScript"></script>
+  <script src="https://d3js.org/d3.v3.min.js" language="JavaScript"></script>
 </head>
 <body>
 
@@ -29,7 +31,7 @@
         <ul class="nav navbar-nav">
           <li><a href="opis.html">Opis ideje</a></li>
           <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
-          <li><a href="#">Generiranje podatkov</a></li>
+          <li><a href="#" onclick="generirajVsePodatke();" >Generiranje podatkov</a></li>
         </ul>
       </div>
     </div>
@@ -39,8 +41,38 @@
   <!-- ZAČETEK: Vsebina aplikacije -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <p class="lead"><strong>TO-DO</strong>: Na tem mestu implementirajte vašo aplikacijo.</p>
+      <div class="col-lg-12 text-left">
+       <!-- OBRAZEC: telesna višina, teža, temperatura, sistolični in diastolični krvni tlak ter nasičenost krvi s kisikom -->
+        <div class="panel-body">
+          <div id="message"></div>
+          <div class="panel-heading">
+            <h3 class="panel-title">Podatki uporabnika</h3>
+          </div>
+          <span class="label label-default">Znani uporabniki</span><select class="form-control input-sm" id="EHRZnanegaUporabnika">
+            <option value = "0"> </option>
+          </select>
+          <span class="label label-default">EHR ID</span><input id="EHRPacienta" type="text" class="form-control input-mini" placeholder="aabb1122-abcd-1234-ab12-43gh87jk5544aa">
+          <span class="label label-default">Ime</span><input id="imePacienta" type="text" class="form-control input-mini" placeholder="Ime">
+          <span class="label label-default">Priimek</span><input id="priimekPacienta" type="text" class="form-control input-mini" placeholder="Priimek">
+          <span class="label label-default">Višina (v cm)</span><input id="visinaPacienta" type="text" class="form-control input-mini" placeholder="180">
+          <span class="label label-default">Teža (v kg)</span><input id="tezaPacienta" type="text" class="form-control input-mini" placeholder="80">
+          <span class="label label-default">Temperatura (v C)</span><input id="temperaturaPacienta" type="text" class="form-control input-mini" placeholder="37">
+          <span class="label label-default">Sistoličnii krvni tlak (v mm Hg)</span><input id="sTlakPacienta" type="text" class="form-control input-mini" placeholder="120">
+          <span class="label label-default">Diastolični krvni tlak (v mm Hg)</span><input id="dTlakPacienta" type="text" class="form-control input-mini" placeholder="80">
+          <span class="label label-default">Nasičenost krvi s kisikom (v %)</span><input id="kisikVKrviPacienta" type="text" class="form-control input-mini" placeholder="95">
+        	<button type="button" class="btn btn-primary btn-xs" onclick="dodajVitalnePodatke();">Dodaj vitalne znake</button><span id="dodajMeritveVitalnihZnakovSporocilo"></span>
+
+        </div>
+       <!-- KONEC OBRAZCA -->
+       <!-- Gumb za izpis in izris podatkov -->
+       <div class="panel-body">
+          <button type ="button" class ="btn btn-primary btn-xs" onclick="preberiPodatke();">Preberi podatke</button>
+          <button type ="button" class ="btn btn-primary btn-xs" onclick="izrisiPodatke();">Izriši podatke</button>
+       </div>
+       <!-- izris podatkov -->
+       <div id="izrisPodatkov">
+         <p>Podatki:</p>
+       </div>
       </div>
     </div>
   </div>
